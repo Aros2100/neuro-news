@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3:*)",
+      "Bash(pip3 install certifi)",
+      "Bash(sqlite3:*)",
+      "Bash(npx create-next-app@latest:*)",
+      "Bash(sudo chown:*)",
+      "Bash(npx:*)",
+      "Bash(npm install:*)",
+      "Bash(npm run build:*)",
+      "Bash(lsof:*)",
+      "Bash(xargs kill:*)",
+      "Bash(npm run dev:*)"
+    ]
+  }
+}
