@@ -28,29 +28,86 @@ function StatCard({ label, value }: { label: string; value: string | number }) {
   );
 }
 
-function ArticleRow({ article }: { article: Article }) {
+const NEWS_VALUE_COLORS: Record<string, string> = {
+  high: "from-rose-500 to-pink-600",
+  medium: "from-amber-500 to-orange-500",
+  moderate: "from-sky-500 to-blue-500",
+  low: "from-slate-400 to-slate-500",
+};
+
+function nvGradient(nv: number): string {
+  if (nv >= 8) return NEWS_VALUE_COLORS.high;
+  if (nv >= 6) return NEWS_VALUE_COLORS.medium;
+  if (nv >= 4) return NEWS_VALUE_COLORS.moderate;
+  return NEWS_VALUE_COLORS.low;
+}
+
+function ArticleCard({ article }: { article: Article }) {
   const subStyle =
     SUBSPECIALTY_STYLES[article.subspecialty] ??
     "bg-slate-500/10 text-slate-600 ring-slate-500/20";
 
+  const isPracticeChanging =
+    article.clinical_relevance === "Practice-changing";
+
+  const abstractPreview = article.abstract
+    ? article.abstract.slice(0, 100) + (article.abstract.length > 100 ? "..." : "")
+    : "";
+
   return (
-    <li className="group flex items-center gap-3 rounded-lg border border-slate-200/80 bg-white px-4 py-3 transition hover:shadow-sm hover:border-slate-300 dark:border-slate-700/80 dark:bg-slate-800/40 dark:hover:border-slate-600">
-      {article.subspecialty && (
-        <span
-          className={`hidden sm:inline-flex shrink-0 rounded-md px-1.5 py-px text-[10px] font-semibold ring-1 ring-inset ${subStyle}`}
-        >
-          {article.subspecialty}
-        </span>
-      )}
-      <Link
-        href={`/article/${article.id}`}
-        className="min-w-0 flex-1 text-sm font-medium leading-snug text-slate-900 group-hover:text-indigo-600 dark:text-slate-100 dark:group-hover:text-indigo-400 transition line-clamp-1"
-      >
-        {article.title}
+    <li className="group rounded-xl border border-slate-200/80 bg-white p-4 shadow-sm transition hover:shadow-md hover:border-slate-300 dark:border-slate-700/80 dark:bg-slate-800/40 dark:hover:border-slate-600">
+      <Link href={`/article/${article.id}`} className="block">
+        {/* Top row: badges + news value */}
+        <div className="flex items-start justify-between gap-3">
+          <div className="flex flex-wrap items-center gap-1.5 min-w-0">
+            {article.subspecialty && (
+              <span
+                className={`inline-flex shrink-0 rounded-md px-1.5 py-px text-[10px] font-semibold ring-1 ring-inset ${subStyle}`}
+              >
+                {article.subspecialty}
+              </span>
+            )}
+            {isPracticeChanging && (
+              <span className="inline-flex shrink-0 rounded-md bg-rose-600 px-1.5 py-px text-[10px] font-semibold text-white">
+                Practice-Changing
+              </span>
+            )}
+          </div>
+          {article.news_value > 0 && (
+            <div
+              className={`flex shrink-0 items-center justify-center rounded-lg bg-gradient-to-br ${nvGradient(article.news_value)} px-2 py-0.5`}
+            >
+              <span className="text-xs font-bold text-white">
+                {article.news_value}/10
+              </span>
+            </div>
+          )}
+        </div>
+
+        {/* Title */}
+        <h3 className="mt-2 text-sm font-semibold leading-snug text-slate-900 group-hover:text-indigo-600 dark:text-slate-100 dark:group-hover:text-indigo-400 transition line-clamp-2">
+          {article.title}
+        </h3>
+
+        {/* Journal + IF + date */}
+        <p className="mt-1 text-[11px] text-slate-500 dark:text-slate-400 truncate">
+          <span className="font-medium">{article.journal}</span>
+          {article.impact_factor != null && (
+            <span className="ml-1 text-amber-600 dark:text-amber-400 font-semibold">
+              IF {article.impact_factor.toFixed(1)}
+            </span>
+          )}
+          <span className="mx-1.5 text-slate-300 dark:text-slate-600">&middot;</span>
+          {article.pub_date}
+        </p>
+
+        {/* Abstract preview */}
+        {abstractPreview && (
+          <p className="mt-1.5 text-xs leading-relaxed text-slate-500 dark:text-slate-400 line-clamp-2">
+            {abstractPreview}
+          </p>
+        )}
       </Link>
-      <span className="shrink-0 text-[11px] text-slate-400 dark:text-slate-500 hidden sm:block">
-        {article.pub_date}
-      </span>
     </li>
   );
 }
@@ -172,9 +229,9 @@ export default function HomeDashboard({
             View all {total} &rarr;
           </Link>
         </div>
-        <ul className="space-y-1.5">
+        <ul className="space-y-3">
           {latestArticles.map((article) => (
-            <ArticleRow key={article.id} article={article} />
+            <ArticleCard key={article.id} article={article} />
           ))}
         </ul>
       </div>
