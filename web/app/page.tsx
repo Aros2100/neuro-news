@@ -44,7 +44,7 @@ export default async function Home() {
   return (
     <div className="min-h-screen font-sans">
       {/* Header */}
-      <header className="relative overflow-hidden border-b border-slate-200/80 bg-gradient-to-br from-indigo-600 via-violet-600 to-purple-700 dark:border-slate-700/80">
+      <header className="relative overflow-hidden border-b border-slate-200/80 bg-gradient-to-br from-sky-500 via-blue-500 to-cyan-500 dark:border-slate-700/80">
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBvcGFjaXR5PSIwLjEiPjxjaXJjbGUgY3g9IjMwIiBjeT0iMzAiIHI9IjEuNSIgZmlsbD0id2hpdGUiLz48L2c+PC9zdmc+')] opacity-40" />
         <div className="relative mx-auto max-w-3xl px-6 py-10">
           <div className="flex items-center gap-3">
@@ -57,7 +57,7 @@ export default async function Home() {
               <h1 className="text-2xl font-bold tracking-tight text-white">
                 Neurosurgery News
               </h1>
-              <p className="text-sm text-indigo-100">
+              <p className="text-sm text-sky-100">
                 Latest neurosurgery research from PubMed
               </p>
             </div>
