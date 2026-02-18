@@ -31,12 +31,13 @@ export default async function Home() {
 
   const highImpact = await getHighImpactCount(5);
 
-  // Pre-sort by date on the server
+  // Pre-sort by date on the server (newest first), with id as tiebreaker
   const latestArticles = [...articles]
     .sort((a, b) => {
       const da = parsePubDate(a.pub_date)?.getTime() ?? 0;
       const db = parsePubDate(b.pub_date)?.getTime() ?? 0;
-      return db - da;
+      if (db !== da) return db - da;
+      return b.id - a.id;
     })
     .slice(0, 10);
 
