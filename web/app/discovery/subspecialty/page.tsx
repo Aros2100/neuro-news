@@ -10,7 +10,7 @@ export default async function SubspecialtyPage() {
   return (
     <div className="min-h-screen font-sans">
       {/* Header */}
-      <header className="relative overflow-hidden border-b border-slate-200/80 bg-gradient-to-br from-indigo-600 via-violet-600 to-purple-700 dark:border-slate-700/80">
+      <header className="relative overflow-hidden border-b border-slate-200/80 bg-red-600 dark:border-slate-700/80">
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBvcGFjaXR5PSIwLjEiPjxjaXJjbGUgY3g9IjMwIiBjeT0iMzAiIHI9IjEuNSIgZmlsbD0id2hpdGUiLz48L2c+PC9zdmc+')] opacity-40" />
         <div className="relative mx-auto max-w-3xl px-6 py-10">
           <div className="flex items-center justify-between">

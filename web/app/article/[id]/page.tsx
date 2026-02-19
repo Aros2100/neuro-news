@@ -61,7 +61,7 @@ export default async function ArticlePage({
 
   return (
     <div className="min-h-screen font-sans">
-      <header className="border-b border-slate-200/80 bg-gradient-to-r from-indigo-600 to-violet-600 dark:border-slate-700/80">
+      <header className="border-b border-slate-200/80 bg-red-600 dark:border-slate-700/80">
         <div className="mx-auto max-w-3xl px-6 py-4">
           <Link
             href="/"
